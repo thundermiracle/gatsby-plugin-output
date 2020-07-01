@@ -4,10 +4,10 @@ const rimraf = require('rimraf');
 
 const defaultOptions = {
   publicPath: 'public',
-  rmPublicFolder: true,
+  rmPublicFolder: false,
 };
 
-exports.onPreBootstrap = (_, pluginOptions) => {
+exports.onPreInit = (_, pluginOptions) => {
   // operate only OUTPUT_DIR is defined
   if (process.env.OUTPUT_DIR) {
     const { publicPath, rmPublicFolder } = {
@@ -17,12 +17,12 @@ exports.onPreBootstrap = (_, pluginOptions) => {
 
     // delete target folder
     const outputFolder = path.join(process.cwd(), process.env.OUTPUT_DIR);
-    rimraf.sync(outputFolder);
+    rimraf.sync(outputFolder, { maxBusyTries: 3 });
 
     if (rmPublicFolder) {
       // delete public folder
       const publicFolder = path.join(process.cwd(), publicPath);
-      rimraf.sync(publicFolder);
+      rimraf.sync(publicFolder, { maxBusyTries: 3 });
     }
   }
 };

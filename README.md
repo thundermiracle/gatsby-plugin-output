@@ -6,7 +6,7 @@
 
 ## Description
 
-Configure the Gatsby's output folder from `./public`.
+Configure the Gatsby's output folder from `./public` to your target folder.
 
 ## Why
 
@@ -26,14 +26,16 @@ yarn add gatsby-plugin-output
 
 ## Usage
 
-1. Define the output dir by environment parameter.
+1. Clean the cache and Define the output dir by environment parameter.
+
+   **IMPORTANT: Gatsby automatically cache the builds in .cache folder, as you moved outputs from `public` to your target folder, build will fail if the cache remains.**
 
    ```json
-   "build": "OUTPUT_DIR=public/blog gatsby build"
+   "build": "gatsby clean && OUTPUT_DIR=public/blog gatsby build"
 
    # in Windows:
 
-   "build": "cross-env OUTPUT_DIR=public/blog gatsby build"
+   "build": "gatsby clean && cross-env OUTPUT_DIR=public/blog gatsby build"
    ```
 
 2. In gatsby-config.js plugins array:
@@ -50,17 +52,17 @@ yarn add gatsby-plugin-output
      options: {
        // default values
        publicPath: 'public',
-       rmPublicFolder: true
+       rmPublicFolder: false
      }
    }
    ```
 
 ## Options
 
-| No. |     Option     | required | Default  | Description                                                                         |
-| :-- | :------------: | :------: | :------- | :---------------------------------------------------------------------------------- |
-| 1   |   publicPath   |          | `public` | the output folder of Gatsby, will always be `public` in Gatsby@v2                   |
-| 2   | rmPublicFolder |          | `true`   | remove `public` folder before build. (Make it `true` to prevent some weird errors.) |
+| No. |     Option     | required | Default  | Description                                                                           |
+| :-- | :------------: | :------: | :------- | :------------------------------------------------------------------------------------ |
+| 1   |   publicPath   |          | `public` | the output folder of Gatsby, will always be `public` in Gatsby@v2                     |
+| 2   | rmPublicFolder |          | `false`  | remove `public` folder before build. (Better use `gatsby clean` to clean the folder.) |
 
 ## License
 
