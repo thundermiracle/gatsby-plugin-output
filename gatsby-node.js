@@ -5,6 +5,7 @@ const rimraf = require('rimraf');
 const defaultOptions = {
   publicPath: 'public',
   rmPublicFolder: false,
+  moveFolder: false,
 };
 
 exports.onPreInit = (_, pluginOptions) => {
@@ -30,7 +31,7 @@ exports.onPreInit = (_, pluginOptions) => {
 exports.onPostBuild = (_, pluginOptions) => {
   // operate only OUTPUT_DIR is defined
   if (process.env.OUTPUT_DIR) {
-    const { publicPath } = {
+    const { publicPath, moveFolder } = {
       ...defaultOptions,
       ...pluginOptions,
     };
@@ -43,8 +44,14 @@ exports.onPostBuild = (_, pluginOptions) => {
     const targetFolder = path.join(process.cwd(), process.env.OUTPUT_DIR);
 
     try {
-      // rename public folder to temporary folder
-      fs.renameSync(publicFolder, tempFolder);
+      if (moveFolder) {
+        // rename public folder to temporary folder
+        fs.renameSync(publicFolder, tempFolder);
+      } else {
+        // copy from public folder to temporary folder
+        fs.copySync(publicFolder, tempFolder);
+      }
+
       // make target folder
       fs.mkdirSync(targetFolder, { recursive: true });
       // move all files from temporary folder to target folder

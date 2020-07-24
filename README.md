@@ -21,7 +21,8 @@ yarn add gatsby-plugin-output
 | No. |     Option     | required | Default  | Description                                                                            |
 | :-- | :------------: | :------: | :------- | :------------------------------------------------------------------------------------- |
 | 1   |   publicPath   |          | `public` | the output folder of Gatsby, will always be `public` in Gatsby@v2                      |
-| 2   | rmPublicFolder |          | `false`  | remove `public` folder before build. (Better use `gatsby clean` to remove the folder.) |
+| 2   | moveFolder |          | `false`  | move `public` folder instead of copy. <br /> **・ gatsby develop may not working well after moving public folder. Better keep this flag false.**  <br />  **・ You should clean gatsby cache by `gatsby clean` before build if `this flag is true`** |
+| 3   | rmPublicFolder |          | `false`  | remove `public` folder before build. <br />**・ Better use `gatsby clean` to remove the folder. if necessary.** |
 
 ## When do I use this plugin?
 
@@ -35,14 +36,12 @@ But sometimes changing output dir is necessary like build Gatsby with `pathPrefi
 
 1. Clean the cache and Define the output dir by environment parameter.
 
-   **IMPORTANT: Gatsby automatically cache the builds in .cache folder, as you moved outputs from `public` to your target folder, build will fail if the `.cache` folder remains.**
-
    ```json
-   "build": "gatsby clean && OUTPUT_DIR=public/blog gatsby build"
+   "build": "OUTPUT_DIR=public/blog gatsby build"
 
    # in Windows:
 
-   "build": "gatsby clean && cross-env OUTPUT_DIR=public/blog gatsby build"
+   "build": "cross-env OUTPUT_DIR=public/blog gatsby build"
    ```
 
 2. In `gatsby-config.js` plugins array:

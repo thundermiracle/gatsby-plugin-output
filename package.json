@@ -1,6 +1,6 @@
 {
   "name": "gatsby-plugin-output",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Gatsby plugin to change build output folder",
   "main": "index.js",
   "scripts": {
@@ -14,6 +14,13 @@
     "type": "git",
     "url": "git+https://github.com/thundermiracle/gatsby-plugin-output.git"
   },
+  "files": [
+    "gatsby-node.js",
+    "index.js",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
   "keywords": [
     "gatsby",
     "gatsby-plugin",
