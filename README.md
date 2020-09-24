@@ -30,7 +30,7 @@ As discussed in ticket [#1878](https://github.com/gatsbyjs/gatsby/issues/1878), 
 
 But sometimes changing output dir is necessary like build Gatsby with `pathPrefix` and deploy it to Netlify's subdirectory. This plugin is trying to move the compiled files from `./public` to your target folder.
 
-**IMPORTANT: In usual case, you'd better put this plugin `in the end of` the gatsby-config.js as other plugins like gatsby-plugin-offline is hard-coding `public` folder.**
+**IMPORTANT: In common cases, you'd better put this plugin `in the end of` the gatsby-config.js as other plugins like gatsby-plugin-offline is hard-coding `public` folder.**
 
 ## Examples of usage
 
@@ -47,10 +47,10 @@ But sometimes changing output dir is necessary like build Gatsby with `pathPrefi
 2. In `gatsby-config.js` plugins array:
 
    ```js
-   `gatsby-plugin-prettier-build`;
+   `gatsby-plugin-output`;
    ```
 
-   And with custom options (See [options detail](#available-options)):
+   Or with options (See [options detail](#available-options)):
 
    ```js
    {
