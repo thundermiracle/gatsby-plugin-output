@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/thundermiracle/gatsby-plugin-output#readme",
   "dependencies": {
-    "fs-extra": "9.0.1",
+    "fs-extra": "^10.0.0",
     "rimraf": "3.0.2"
   },
   "devDependencies": {
